@@ -19,11 +19,11 @@ def print_winner(winner):
     else:
         print ("\nPareggio\n")
 
-def start_game():
-    for i in range(0, 1):
+def start_game(time_between_steps = 1, time_between_episodes=2):
+    for i in range(0, 100):
         done = False
         print("Start episode ", i)
-        time.sleep(2)
+        time.sleep(time_between_episodes)
         state = env.reset()
         while (done is False):
             action_1 = agent_1.choose_action(state)
@@ -44,7 +44,7 @@ def start_game():
                 print_winner(info.get("winner", None))
                 time.sleep(2)
                 break
-            time.sleep(1)
+            time.sleep(time_between_steps)
             state = new_state_1
             action_2 = agent_2.choose_action(state)
             new_state_2, reward_2, done, info = env.step(action_2)
@@ -62,8 +62,8 @@ def start_game():
                 print_winner(info.get("winner", None))
                 time.sleep(2)
                 break
-            time.sleep(1)
+            time.sleep(time_between_steps)
     agent_1.save_q_table(agent_1_q_table_name)
     agent_2.save_q_table(agent_2_q_table_name)
 
-start_game()
+start_game(time_between_steps=0, time_between_episodes=0)
