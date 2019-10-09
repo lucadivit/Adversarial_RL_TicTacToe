@@ -12,6 +12,7 @@ agent_1 = QLearningAgent(env=env, policy=policy)
 agent_2 = QLearningAgent(env=env, policy=policy)
 agent_1.load_stored_q_table(agent_1_q_table_name)
 agent_2.load_stored_q_table(agent_2_q_table_name)
+time.sleep(1)
 
 def print_winner(winner):
     if (winner is not None):
