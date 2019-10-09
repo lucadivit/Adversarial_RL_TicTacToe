@@ -6,8 +6,12 @@ from GreedyPolicies import *
 
 env = gym.make("tictactoe-v0")
 policy = EGreedyPolicy()
+agent_1_q_table_name = "q_learning_agent_1.pkl"
+agent_2_q_table_name = "q_learning_agent_2.pkl"
 agent_1 = QLearningAgent(env=env, policy=policy)
 agent_2 = QLearningAgent(env=env, policy=policy)
+agent_1.load_stored_q_table(agent_1_q_table_name)
+agent_2.load_stored_q_table(agent_2_q_table_name)
 
 def print_winner(winner):
     if (winner is not None):
@@ -16,7 +20,7 @@ def print_winner(winner):
         print ("\nPareggio\n")
 
 def start_game():
-    for i in range(0, 100):
+    for i in range(0, 1):
         done = False
         print("Start episode ", i)
         time.sleep(2)
@@ -59,5 +63,7 @@ def start_game():
                 time.sleep(2)
                 break
             time.sleep(1)
+    agent_1.save_q_table(agent_1_q_table_name)
+    agent_2.save_q_table(agent_2_q_table_name)
 
 start_game()
